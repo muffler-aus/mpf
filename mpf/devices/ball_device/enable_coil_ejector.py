@@ -7,9 +7,9 @@ class EnableCoilEjector(BallDeviceEjector):
 
     """Enable a coil to eject one ball."""
 
-    def __init__(self, ball_device):
+    def __init__(self, config, ball_device, machine):
         """Initialise ejector."""
-        super().__init__(ball_device)
+        super().__init__(config, ball_device, machine)
         self.delay = DelayManager(self.ball_device.machine.delayRegistry)
 
     def eject_one_ball(self, is_jammed, eject_try):

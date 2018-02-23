@@ -10,9 +10,9 @@ class HoldCoilEjector(BallDeviceEjector):
         """Eject all balls."""
         raise NotImplementedError()
 
-    def __init__(self, ball_device):
+    def __init__(self, config, ball_device, machine):
         """Initialise hold coil ejector."""
-        super().__init__(ball_device)
+        super().__init__(config, ball_device, machine)
         self.hold_release_in_progress = False
 
         # handle hold_coil activation when a ball hits a switch

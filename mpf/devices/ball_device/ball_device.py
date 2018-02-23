@@ -417,13 +417,14 @@ class BallDevice(SystemWideDevice):
         # validate that configuration is valid
         self._validate_config()
 
+        ejector_config = self.config.get("ejector", {})
         if self.config['eject_coil']:
             if self.config['eject_coil_enable_time']:
-                self.ejector = EnableCoilEjector(self)
+                self.ejector = EnableCoilEjector(ejector_config, self, self.machine)
             else:
-                self.ejector = PulseCoilEjector(self)
+                self.ejector = PulseCoilEjector(ejector_config, self, self.machine)
         elif self.config['hold_coil']:
-            self.ejector = HoldCoilEjector(self)
+            self.ejector = HoldCoilEjector(ejector_config, self, self.machine)
 
         if self.ejector and self.config['ball_search_order']:
             self.config['captures_from'].ball_search.register(
